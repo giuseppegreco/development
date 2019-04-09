@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--+
+<source name="source-files.xml" language="XML" begin="15-May-2003">
+<author href="mailto:giuseppe.greco@agamura.com">Giuseppe Greco</author>
+<copyright year="2003">
+<holder web="http://www.agamura.com">Agamura, Inc.</holder>
+</copyright>
+<legalnotice>All rights reserved.</legalnotice>
+</source>
+-->
+
+<sect1 xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://docbook.org/ns/docbook http://docbook.org/xml/5.0/xsd/docbook.xsd"
+    xml:id="source-files">
+  <title>Source Files</title>
+
+  <para>
+    Source files should be kept as short as possible. Put every class in a
+    separate file, and name that file like the class followed by the
+    <filename class="extension">.cs</filename> extension.
+  </para>
+  <para>
+    For each assembly, create a new directory named like the assembly itself,
+    and inside each assembly directory, map namespaces one-to-one to the directory
+    layout. For example, namespace <literal>Thermota.Core.Properties</literal>
+    in assembly <literal>Termota.Core</literal> should be mapped to directory
+    <filename class="directory">Thermota.Core</filename>.
+  </para>
+  <para>
+    Organize the material in each source file as follows:
+    <itemizedlist spacing="compact" mark="bullet">
+      <listitem><simpara>
+        A file header
+      </simpara></listitem>
+      <listitem><simpara>
+        <literal>using</literal> statements
+      </simpara></listitem>
+      <listitem><simpara>
+        <literal>namespace</literal> statement, if appropriate
+      </simpara></listitem>
+      <listitem><simpara>
+        A <literal>class</literal>, <literal>struct</literal>, or
+        <literal>enum</literal>
+      </simpara></listitem>
+    </itemizedlist>
+  </para>
+  <para>
+    The file header should at least include the file name, begin date, author,
+    and copyright notice:
+    <programlisting>
+      <![CDATA[
+//+ <source name="Thermometer.cs" language="C#" begin="2-Jan-2012">
+//+ <author href="mailto:giuseppe.greco@agamura.com">Giuseppe Greco</author>
+//+ <copyright year="2012">
+//+ <holder web="http://www.agamura.com">Agamura, Inc.</holder>
+//+ </copyright>
+//+ <legalnotice>All rights reserved.</legalnotice>
+//+ </source>
+      ]]>
+    </programlisting>
+  </para>
+</sect1>

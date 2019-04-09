@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--+
+<source name="methods.xml" language="XML" begin="19-May-2003">
+<author href="mailto:giuseppe.greco@agamura.com">Giuseppe Greco</author>
+<copyright year="2003">
+<holder web="http://www.agamura.com">Agamura, Inc.</holder>
+</copyright>
+<legalnotice>All rights reserved.</legalnotice>
+</source>
+-->
+
+<sect1 xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://docbook.org/ns/docbook http://docbook.org/xml/5.0/xsd/docbook.xsd"
+    xml:id="methods">
+  <title>Methods</title>
+
+  <para>
+    Every method should be preceded by a documentation comment explaining
+    the purpose of the method:
+    <programlisting>
+      <![CDATA[
+/// <summary>
+/// Handles the <see cref="DetectTemperature"/> event.
+/// </summary>
+/// <param name="sender">
+/// The <see cref="Probe"/> that generated the event.
+/// </param>
+/// <param name="args">
+/// A <see cref="DetectTemperatureEventArgs"/> that contains the last detected
+/// temperature.
+/// </param>
+private void OnDetectTemperature(
+    Object sender, DetectTemperatureEventArgs args)
+{
+  ...
+}
+      ]]>
+    </programlisting>
+  </para>
+  <para>
+    Parameter names should be explicit, especially if they are integers or
+    Booleans:
+    <programlisting>
+      <![CDATA[
+public void DetectTemperatureEventArgs(int i)
+{
+    // Avoid
+}
+
+public void DetectTemperatureEventArgs(int temperature)
+{
+    // OK
+}
+      ]]>
+    </programlisting>
+    Of course, for very generic methods, short parameter names may be more
+    appropriate:
+    <programlisting>
+      <![CDATA[
+public static void Sort(int[] i)
+{
+    // OK
+}
+      ]]>
+    </programlisting>
+  </para>
+  <para>
+    Methods should have at most 30 lines of code. The method header, comments,
+    blank lines, and lines containing only braces are not included in this
+    count. Methods that consist of one long
+    <literal>if</literal>-<literal>else</literal> or <literal>switch</literal>
+    may be longer, provided each branch in 10 lines or fewer. This rule forces
+    to break up complex computations into separate methods.
+  </para>
+</sect1>

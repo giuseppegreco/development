@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--+
+<source name="code-example.xml" language="XML" begin="25-May-2003">
+<author href="mailto:giuseppe.greco@agamura.com">Giuseppe Greco</author>
+<copyright year="2003">
+<holder web="http://www.agamura.com">Agamura, Inc.</holder>
+</copyright>
+<legalnotice>All rights reserved.</legalnotice>
+</source>
+-->
+
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://docbook.org/ns/docbook http://docbook.org/xml/5.0/xsd/docbook.xsd"
+    xml:id="code-example">
+  <title>Code Example</title>
+
+  <para>
+    This appendix provides the full source code from which the examples in this
+    document have been extracted. The complete example project can be downloaded
+    from <link url="http://developer.agamura.com/resources/">Agamura's
+    developer site</link>.
+  </para>
+
+  <sect1 xml:id="ThermometerConsole.cs">
+    <title><filename>ThermometerConsole.cs</filename></title>
+
+    <programlisting linenumbering="numbered">
+        <![CDATA[
+#region Header
+//+ <source name="ThermometerConsole.cs" language="C#" begin="2-Jan-2012">
+//+ <author href="mailto:giuseppe.greco@agamura.com">Giuseppe Greco</author>
+//+ <copyright year="2012">
+//+ <holder web="http://www.agamura.com">Agamura, Inc.</holder>
+//+ </copyright>
+//+ <legalnotice>All rights reserved.</legalnotice>
+//+ </source>
+#endregion
+
+#region References
+using System;
+using System.Threading;
+using Thermota.Core;
+#endregion
+
+namespace Thermota
+{
+    /// <summary>
+    /// Implements the thermometer console.
+    /// </summary>
+    public class ThermometerConsole
+    {
+        #region Fields
+        private const string Prompt = "[thermota ~]$";
+
+        private static readonly string CommandAverage;
+        private static readonly string CommandCurrent;
+        private static readonly string CommandExit;
+        private static readonly string CommandHelp;
+
+        private static readonly string MessageWelcome;
+        private static readonly string MessageAverage;
+        private static readonly string MessageCurrent;
+        private static readonly string MessageExit;
+        private static readonly string MessageHelp;
+        #endregion
+
+        #region Constructors
+        /// <summary>
+        /// Initializes static members.
+        /// </summary>
+        static ThermometerConsole()
+        {
+            // Commands
+            CommandAverage = Resources.Command_Average;
+            CommandCurrent = Resources.Command_Current;
+            CommandExit = Resources.Command_Exit;
+            CommandHelp = Resources.Command_Help;
+
+            // Messages
+            MessageWelcome = Resources.Message_Welcome;
+            MessageAverage = Resources.Message_Average;
+            MessageCurrent = Resources.Message_Current;
+            MessageExit = Resources.Message_Exit;
+            MessageHelp = Resources.Message_Help;
+        }
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Entry point of the program.
+        /// </summary>
+        public static void Main()
+        {
+            Thermometer thermometer = new Thermometer();
+
+            Console.WriteLine(MessageWelcome);
+
+            string command;
+            bool exit = false;
+
+            do {
+                Console.Write("\n" + Prompt + " ");
+                command = Console.ReadLine();
+
+                if (command == CommandAverage) {
+                    Console.WriteLine(thermometer.AverageTemperature);
+                }
+                else if (command == CommandCurrent) {
+                    Console.WriteLine(thermometer.Temperature);
+                }
+                else if (command == CommandExit) {
+                    exit = true;
+                }
+                else {
+                    Console.WriteLine(CommandAverage + "\t\t" + MessageAverage);
+                    Console.WriteLine(CommandCurrent + "\t\t" + MessageCurrent);
+                    Console.WriteLine(CommandExit + "\t\t" + MessageExit);
+                    Console.WriteLine(CommandHelp + "\t\t" + MessageHelp);
+                }
+            } while (!exit);
+        }
+        #endregion
+    }
+}
+      ]]>
+    </programlisting>
+  </sect1>
+
+  <sect1 xml:id="DetectTemperatureEventArgs.cs">
+    <title><filename>DetectTemperatureEventArgs.cs</filename></title>
+
+    <programlisting linenumbering="numbered">
+      <![CDATA[
+#region Header
+//+ <source name="DetectTemperatureEventArgs.cs" language="C#" begin="2-Jan-2012">
+//+ <author href="mailto:giuseppe.greco@agamura.com">Giuseppe Greco</author>
+//+ <copyright year="2012">
+//+ <holder web="http://www.agamura.com">Agamura, Inc.</holder>
+//+ </copyright>
+//+ <legalnotice>All rights reserved.</legalnotice>
+//+ </source>
+#endregion
+
+#region References
+using System;
+#endregion
+
+namespace Thermota.Core
+{
+    /// <summary>
+    /// Provides data for the <see cref="Probe.DetectTemperature"/> event.
+    /// </summary>
+    public class DetectTemperatureEventArgs : EventArgs
+    {
+        #region Fields
+        private int temperature;
+        #endregion
+
+        #region Properties
+        /// <summary>
+        /// Gets the detected temperature.
+        /// </summary>
+        /// <value>
+        /// The detected temperature in degrees Celsius.
+        /// </value>
+        public int Temperature
+        {
+            get { return temperature; }
+        }
+        #endregion
+
+        #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="DetectTemperatureEventArgs"/> class with the specified
+        /// temperature.
+        /// </summary>
+        /// <param name="temperature">
+        /// The detected temperature in degrees Celsius.
+        /// </param>
+        public DetectTemperatureEventArgs(int temperature)
+        {
+            this.temperature = temperature;
+        }
+        #endregion
+    }
+}
+      ]]>
+    </programlisting>
+  </sect1>
+
+  <sect1 xml:id="Probe.cs">
+    <title><filename>Probe.cs</filename></title>
+
+    <programlisting linenumbering="numbered">
+      <![CDATA[
+#region Header
+//+ <source name="Probe.cs" language="C#" begin="2-Jan-2012">
+//+ <author href="mailto:giuseppe.greco@agamura.com">Giuseppe Greco</author>
+//+ <copyright year="2012">
+//+ <holder web="http://www.agamura.com">Agamura, Inc.</holder>
+//+ </copyright>
+//+ <legalnotice>All rights reserved.</legalnotice>
+//+ </source>
+#endregion
+
+#region References
+using System;
+using System.Threading;
+#endregion
+
+namespace Thermota.Core
+{
+    /// <summary>
+    /// Implements a virtual probe for simulating temperature detections.
+    /// </summary>
+    public class Probe
+    {
+        #region Fields
+        private const int AbsoluteZero = -273;
+        private const int MaxTemperature = 100;
+        private const int DetectionInterval = 5000;
+        private Thread detector;
+        #endregion
+
+        #region Events
+        /// <summary>
+        /// Occurs when a temperature detection is performed.
+        /// </summary>
+        public event EventHandler<DetectTemperatureEventArgs> DetectTemperature;
+        #endregion
+
+        #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Probe"/> class.
+        /// </summary>
+        public Probe() { }
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Starts temperature detections.
+        /// </summary>
+        public void Start()
+        {
+            detector = new Thread(new ThreadStart(Detect));
+            detector.Start();
+            detector.IsBackground = true;
+        }
+
+        /// <summary>
+        /// Stops temperature detections.
+        /// </summary>
+        public void Stop()
+        {
+            detector.Join(0);
+        }
+
+        /// <summary>
+        /// Simulates temperature detections.
+        /// </summary>
+        private void Detect()
+        {
+            int temperature;
+            Random random = new Random();
+
+            while (true) {
+                try {
+                    temperature = random.Next(AbsoluteZero, MaxTemperature);
+                }
+                catch (ArgumentOutOfRangeException) {
+                    temperature = MaxTemperature;
+                }
+
+                if (DetectTemperature != null) {
+                    DetectTemperatureEventArgs args =
+                        new DetectTemperatureEventArgs(temperature);
+
+                    DetectTemperature(this, args);
+                }
+
+                Thread.Sleep(DetectionInterval);
+            }
+        }
+        #endregion
+    }
+}
+      ]]>
+    </programlisting>
+  </sect1>
+
+  <sect1 xml:id="Thermometer.cs">
+    <title><filename>Thermometer.cs</filename></title>
+
+    <programlisting linenumbering="numbered">
+      <![CDATA[
+#region Header
+//+ <source name="Thermometer.cs" language="C#" begin="2-Jan-2012">
+//+ <author href="mailto:giuseppe.greco@agamura.com">Giuseppe Greco</author>
+//+ <copyright year="2012">
+//+ <holder web="http://www.agamura.com">Agamura, Inc.</holder>
+//+ </copyright>
+//+ <legalnotice>All rights reserved.</legalnotice>
+//+ </source>
+#endregion
+
+#region References
+using System;
+using System.Collections;
+#endregion
+
+namespace Thermota.Core
+{
+    /// <summary>
+    /// Models a thermometer.
+    /// </summary>
+    public class Thermometer
+    {
+        #region Fields
+        private const int MaxCapacity = 50;
+
+        private Probe probe;
+        private int temperature;
+        private ArrayList temperatures;
+        #endregion
+
+        #region Properties
+        /// <summary>
+        /// Gets the current temperature.
+        /// </summary>
+        /// <value>
+        /// The current temperature in degrees Celsius.
+        /// </value>
+        public int Temperature
+        {
+            get { return temperature; }
+        }
+
+        /// <summary>
+        /// Gets the average temperature.
+        /// </summary>
+        /// <value>
+        /// The average temperature in degrees Celsius.
+        /// </value>
+        public int AverageTemperature
+        {
+            get {
+                int temperatureSum = 0;
+
+                foreach (int temperature in temperatures) {
+                    temperatureSum += temperature;
+                }
+
+                int averageTemperature;
+
+                if (temperatureSum > 0) {
+                    averageTemperature = temperatureSum / temperatures.Count;
+                }
+                else {
+                    averageTemperature = this.Temperature;
+                }
+
+                return averageTemperature;
+            }
+        }
+        #endregion
+
+        #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Thermometer"/> class.
+        /// </summary>
+        public Thermometer()
+        {
+            temperatures = ArrayList.Synchronized(new ArrayList(MaxCapacity));
+            probe = new Probe();
+
+            probe.DetectTemperature +=
+                new EventHandler<DetectTemperatureEventArgs>(OnDetectTemperature);
+
+            probe.Start();
+        }
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Handles the <see cref="Probe.DetectTemperature"/> event.
+        /// </summary>
+        /// <param name="sender">
+        /// The <see cref="Probe"/> that generated the event.
+        /// </param>
+        /// <param name="args">
+        /// A <see cref="DetectTemperatureEventArgs"/> that contains the last
+        /// detected temperature.
+        /// </param>
+        private void OnDetectTemperature(
+            Object sender, DetectTemperatureEventArgs args)
+        {
+            temperature = args.Temperature;
+
+            if (temperatures.Count == MaxCapacity) {
+                temperatures.RemoveAt(0);
+            }
+
+            temperatures.Add(temperature);
+        }
+        #endregion
+    }
+}
+      ]]>
+    </programlisting>
+  </sect1>
+</appendix>

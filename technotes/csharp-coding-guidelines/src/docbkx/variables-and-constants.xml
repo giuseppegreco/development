@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--+
+<source name="variables-and-constants.xml" language="XML" begin="19-May-2003">
+<author href="mailto:giuseppe.greco@agamura.com">Giuseppe Greco</author>
+<copyright year="2003">
+<holder web="http://www.agamura.com">Agamura, Inc.</holder>
+</copyright>
+<legalnotice>All rights reserved.</legalnotice>
+</source>
+-->
+
+<sect1 xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://docbook.org/ns/docbook http://docbook.org/xml/5.0/xsd/docbook.xsd"
+    xml:id="variables-and-constants">
+  <title>Variables and Constants</title>
+
+  <para>
+    Do not define all variables at the beginning of a block:
+    <programlisting>
+      <![CDATA[
+public static void Main()
+{
+    string command; // Avoid
+    bool exit = false; // Avoid
+    Thermometer thermometer = new Thermometer();
+
+    Console.WriteLine(MessageWelcome);
+
+    do {
+        ...
+        command = Console.ReadLine();
+        ...
+    } while (!exit);
+}
+      ]]>
+    </programlisting>
+    Instead, define each variable just before it is used for the first time;
+    <programlisting>
+      <![CDATA[
+public static void Main()
+{
+    Thermometer thermometer = new Thermometer();
+
+    Console.WriteLine(MessageWelcome);
+
+    string command; // OK
+    bool exit = false; // OK
+
+    do {
+        ...
+        command = Console.ReadLine();
+        ...
+    } while (!exit);
+}
+      ]]>
+    </programlisting>
+    Do not define two variables on the same line:
+    <programlisting>
+      <![CDATA[
+int celsius = 0, farenheit = 0; // Avoid
+      ]]>
+    </programlisting>
+  </para>
+  <para>
+    Define <literal>const</literal> fields as <literal>private</literal> or
+    <literal>protected</literal> if no other class has an interest in them.
+  </para>
+  <para>
+    Do not use <emphasis>magic numbers</emphasis>! A magic number is a
+    numeric constant embedded in code, without a constant definition. Any
+    number except -1, 0, and 1 is considered magic:
+    <programlisting>
+      <![CDATA[
+temperature = random.Next(-273, 100); // Avoid
+      ]]>
+    </programlisting>
+    Use <literal>const</literal> fields instead:
+    <programlisting>
+      <![CDATA[
+private const int AbsoluteZero = -273;
+private const int MaxTemperature = 100;
+...
+temperature = random.Next(AbsoluteZero, MaxTemperature); // OK
+      ]]>
+    </programlisting>
+  </para>
+</sect1>

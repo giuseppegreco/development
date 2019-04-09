@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--+
+<source name="classes-and-structs.xml" language="XML" begin="19-May-2003">
+<author href="mailto:giuseppe.greco@agamura.com">Giuseppe Greco</author>
+<copyright year="2003">
+<holder web="http://www.agamura.com">Agamura, Inc.</holder>
+</copyright>
+<legalnotice>All rights reserved.</legalnotice>
+</source>
+-->
+
+<sect1 xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://docbook.org/ns/docbook http://docbook.org/xml/5.0/xsd/docbook.xsd"
+    xml:id="classes-and-structs">
+  <title>Classes and Structs</title>
+
+  <para>
+    Each class and each struct should be preceded by a documentation comment
+    explaining the purpose of the class or the purpose of the struct,
+    respectively:
+    <programlisting>
+      <![CDATA[
+/// <summary>
+/// Models a thermometer.
+/// </summary>
+public class Thermometer
+{
+    ...
+}
+      ]]>
+    </programlisting>
+    Use the documentation feature supported by the C# compiler by including the
+    reserved XML tags in special comment lines preceded by three slashes just
+    before the code block they refer to.
+  </para>
+  <para>
+    Define features in alphabetical order and group them as following:
+    <itemizedlist spacing="compact" mark="bullet">
+      <listitem><simpara>
+        Nested classes
+      </simpara></listitem>
+      <listitem><simpara>
+        <literal>const</literal> fields
+      </simpara></listitem>
+      <listitem><simpara>
+        <literal>readonly</literal> fields
+      </simpara></listitem>
+      <listitem><simpara>
+        <literal>static</literal> variables
+      </simpara></listitem>
+      <listitem><simpara>
+        Instance (or class) variables
+      </simpara></listitem>
+      <listitem><simpara>
+        Properties
+      </simpara></listitem>
+      <listitem><simpara>
+        Operators
+      </simpara></listitem>
+      <listitem><simpara>
+        Methods
+      </simpara></listitem>
+    </itemizedlist>
+    <literal>public</literal> features should precede
+    <literal>protected</literal> and <literal>private</literal> features.
+  </para>
+  <para>
+    Leave a blank line after each group of related fields or variables as well
+    as after every property or method.
+  </para>
+  <para>
+    All instance variables must be private. Use properties to provide access
+    to them &#x2014; however, instance variables of a private inner class or struct
+    may be public. Methods, properties, and <literal>const</literal> fields
+    can be either <literal>public</literal>, <literal>protected</literal>, or
+    <literal>private</literal>, as appropriate.
+  </para>
+  <para>
+    All features must be tagged either <literal>public</literal>,
+    <literal>protected</literal>, or <literal>private</literal>. Do not use
+    the default visibility.
+  </para>
+</sect1>

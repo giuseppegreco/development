@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--+
+<source name="lexical-issues.xml" language="XML" begin="20-May-2003">
+<author href="mailto:giuseppe.greco@agamura.com">Giuseppe Greco</author>
+<copyright year="2003">
+<holder web="http://www.agamura.com">Agamura, Inc.</holder>
+</copyright>
+<legalnotice>All rights reserved.</legalnotice>
+</source>
+-->
+
+<sect1 xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://docbook.org/ns/docbook http://docbook.org/xml/5.0/xsd/docbook.xsd"
+    xml:id="lexical-issues">
+  <title>Lexical Issues</title>
+
+  <sect2 xml:id="naming-convention">
+    <title>Naming Convention</title>
+
+    <para>
+      Before you go through the rules for naming program elements, you should
+      be aware of the two most common ways of using character casing (UPPER
+      and lower case) to distinguish between elements. They are:
+
+      <informaltable rowheader="firstcol" frame="none">
+        <tgroup cols="2">
+          <colspec column="1" colsep="0" rowsep="0" colwidth="2*"/>
+          <colspec column="2" colsep="0" rowsep="0" colwidth="8*"/>
+          <tbody>
+            <row>
+              <entry>Pascal Casing</entry>
+              <entry>
+                The first character is upper case, and the first letter of
+                each word is also upper case. All other characters are lower
+                case; for example, <literal>CurrentTemperature</literal>.
+              </entry>
+            </row>
+            <row>
+              <entry>Camel Casing</entry>
+              <entry>
+                The first character is not upper case, but the first letter
+                of each word is upper case. All other characters are lower
+                case; for example, <literal>currentTemperature</literal>.
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </para>
+
+    <para>
+      The following rules specify how to define identifier names:
+      <itemizedlist spacing="normal" mark="bullet">
+        <listitem><simpara>
+          <emphasis>Namespaces</emphasis> must be named using Pascal casing, and
+          their names must be nouns or noun phrases describing a logical group
+          of classes (do not use any prefix); for example,
+          <literal>Thermometer</literal>.
+        </simpara></listitem>
+        <listitem><simpara>
+          <emphasis>Classes</emphasis> and <emphasis>structs</emphasis> must
+          be named using Pascal casing, and their names must be nouns or noun
+          phrases describing behavior (do not use any prefix); for example,
+          <literal>Thermometer</literal>. <emphasis>Exception classes</emphasis>
+          must always have the <literal>Exception</literal> suffix; for
+          example, <literal>OutOfRangeException</literal>.
+        </simpara></listitem>
+        <listitem><simpara>
+          <emphasis>Interfaces</emphasis> must be named using Pascal casing,
+          and their names must be nouns or noun phrases prefixed with
+          <literal>I</literal> describing behavior; for example,
+          <literal>IComponent</literal>.
+        </simpara></listitem>
+        <listitem><simpara>
+          <emphasis>Enumeration</emphasis> types and values must be named using
+          Pascal casing, and their names must be singular nouns or plural
+          nouns for bit fields (do not use any prefix); for example,
+          <literal>TemperatureScale.Celsius</literal>.
+        </simpara></listitem>
+        <listitem><simpara>
+          <emphasis>Read-only</emphasis> and <emphasis>constant</emphasis>
+          fields must be named using Pascal casing, and their names must be
+          nouns or abbreviations for nouns; for example,
+          <literal>AbsoluteZero</literal>.
+        </simpara></listitem>
+        <listitem><simpara>
+          <emphasis>Parameter</emphasis> and <emphasis>non-constant</emphasis>
+          fields must be named using Camel casing, and their names should be
+          nouns or noun phrases describing the meaning of the field; for example,
+          <literal>newTemperature</literal>.
+        </simpara></listitem>
+        <listitem><simpara>
+          <emphasis>Variables</emphasis> must be named using Camel casing, and
+          their names should describe the meaning of the variable, unless they
+          are used in trivial counting loops; for example,
+          <literal>sumTemperature</literal>.
+        </simpara></listitem>
+        <listitem><simpara>
+          <emphasis>Methods</emphasis> must be named using Pascal casing, and
+          their names must be verbs or verb phrases; for example,
+          <literal>Detect()</literal>.
+        </simpara></listitem>
+        <listitem><simpara>
+          <emphasis>Properties</emphasis> must be named using Pascal casing,
+          and their names must be nouns or noun phrases describing the meaning
+          of the property (consider naming properties like the attributes they
+          represent); for example, <literal>AverageTemperature</literal>.
+        </simpara></listitem>
+        <listitem><simpara>
+          <emphasis>Events</emphasis> must be named using Pascal casing, and
+          their name should be verbs or verb phrases describing the event;
+          for example, <literal>DetectTemperature</literal>.
+        </simpara></listitem>
+        <listitem><simpara>
+          <emphasis>Event handlers</emphasis> must be named using Pascal casing,
+          and their names should be the same as the name of the events they
+          handle with the <literal>EventHandler</literal> suffix. Event
+          handlers must always have two parameters named
+          <literal>sender</literal> and <literal>args</literal>, respectively,
+          and event argument classes should always have the
+          <literal>EventArgs</literal> suffix:
+          <programlisting>
+            <![CDATA[
+public delegate void DetectTemperatureEventHandler(Object sender,
+    DetectTemperatureEventArgs args);
+            ]]>
+          </programlisting>
+        </simpara></listitem>
+      </itemizedlist>
+    </para>
+    <formalpara>
+      <title>Summary</title>
+
+      <para>
+        <informaltable rowheader="firstcol" frame="all">
+          <tgroup cols="4" align="left" colsep="1" rowsep="1">
+            <colspec column="1" colwidth="3*"/>
+            <colspec column="2" colwidth="1*"/>
+            <colspec column="2" colwidth="1*"/>
+            <colspec column="2" colwidth="5*"/>
+        
+            <thead valign="middle">
+              <row>
+                <entry></entry>
+                <entry>Pascal Casing</entry>
+                <entry>Camel Casing</entry>
+                <entry>Comments</entry>
+              </row>
+            </thead>
+
+            <tbody valign="middle">
+              <row>
+                <entry>Namespaces</entry>
+                <entry align="center">X</entry>
+                <entry></entry>
+                <entry></entry>
+              </row>
+              <row>
+                <entry>Classes/Structs</entry>
+                <entry align="center">X</entry>
+                <entry></entry>
+                <entry></entry>
+              </row>
+              <row>
+                <entry>Exception Classes</entry>
+                <entry align="center">X</entry>
+                <entry></entry>
+                <entry>End with <literal>Exception</literal></entry>
+              </row>
+              <row>
+                <entry>Event Argument Classes</entry>
+                <entry align="center">X</entry>
+                <entry></entry>
+                <entry>End with <literal>EventArgs</literal></entry>
+              </row>
+              <row>
+                <entry>Interfaces</entry>
+                <entry align="center">X</entry>
+                <entry></entry>
+                <entry>Start with <literal>I</literal></entry>
+              </row>
+              <row>
+                <entry>Enumerations</entry>
+                <entry align="center">X</entry>
+                <entry></entry>
+                <entry></entry>
+              </row>
+              <row>
+                <entry>Enumeration Values</entry>
+                <entry align="center">X</entry>
+                <entry></entry>
+                <entry></entry>
+              </row>
+              <row>
+                <entry>Readonly/Const Fields</entry>
+                <entry align="center">X</entry>
+                <entry></entry>
+                <entry></entry>
+              </row>
+              <row>
+                <entry>Public Fields</entry>
+                <entry align="center">X</entry>
+                <entry></entry>
+                <entry></entry>
+              </row>
+              <row>
+                <entry>Protected Fields</entry>
+                <entry></entry>
+                <entry align="center">X</entry>
+                <entry></entry>
+              </row>
+              <row>
+                <entry>Private Fields</entry>
+                <entry></entry>
+                <entry align="center">X</entry>
+                <entry></entry>
+              </row>
+              <row>
+                <entry>Parameters</entry>
+                <entry></entry>
+                <entry align="center">X</entry>
+                <entry></entry>
+              </row>
+              <row>
+                <entry>Methods</entry>
+                <entry align="center">X</entry>
+                <entry></entry>
+                <entry></entry>
+              </row>
+              <row>
+                <entry>Properties</entry>
+                <entry align="center">X</entry>
+                <entry></entry>
+                <entry></entry>
+              </row>
+              <row>
+                <entry>Events</entry>
+                <entry align="center">X</entry>
+                <entry></entry>
+                <entry></entry>
+              </row>
+              <row>
+                <entry>Event Handlers</entry>
+                <entry align="center">X</entry>
+                <entry></entry>
+                <entry>End with <literal>EventHandler</literal></entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </para>
+    </formalpara>
+  </sect2>
+
+  <sect2 xml:id="Indentation-and-white-spaces">
+    <title>Indentation and White Spaces</title>
+
+    <para>
+      Use tab stops every two columns and set them to be expanded to white spaces.
+      That means you will need to change the tab stop setting in your editor!
+    </para>
+    <para>
+      Use blank lines freely to separate parts of a method that are logically
+      distinct. Use a white space around every binary operator:
+      <programlisting>
+        <![CDATA[
+averageTemperature=temperatureSum/temperatures.Count; // Avoid
+averageTemperature = temperatureSum / temperatures.Count; // OK
+        ]]>
+      </programlisting>
+    </para>
+    <para>
+      Leave a white space after (and not before) a comma, semicolon, and
+      keyword, but not after a method name:
+      <programlisting>
+        <![CDATA[
+public void OnDetectTemperature(
+    Object sender, DetectTemperatureEventArgs args)
+{
+    ...
+    if (temperatures.Count == MaxCapacity) {
+        temperatures.RemoveAt(0);
+    }
+    ...
+}
+        ]]>
+      </programlisting>
+    </para>
+    <para>
+      Every line should fit on 80 columns. If you must break a statement, add
+      an indentation level for the continuation:
+      <programlisting>
+        <![CDATA[
+probe.DetectTemperature +=
+    new Probe.DetectTemperatureEventHandler(OnDetectTemperature);
+        ]]>
+      </programlisting>
+      When breaking arithmetic expressions, start the indented line with an
+      operator:
+      <programlisting>
+        <![CDATA[
+farenheit = (celsius * 1.8)
+          + 32;
+
+celsius = (farenheit - 32)
+        * (5 / 9);
+        ]]>
+      </programlisting>
+    </para>
+  </sect2>
+
+  <sect2 xml:id="braces">
+    <title>Braces</title>
+
+    <para>
+      Opening curly braces should be placed on the same line as the keyword
+      they are associated with &#x2014; preceded by a white space, unless you
+      are declaring a <emphasis>namespace</emphasis>, <emphasis>class</emphasis>,
+      <emphasis>struct</emphasis>, <emphasis>interface</emphasis>, or
+      <emphasis>method</emphasis>. In these cases opening curly braces should
+      begin on a new line. Keywords and closing curly braces must always line
+      up vertically:
+      <programlisting>
+        <![CDATA[
+namespace Thermota.Core
+{
+    ...
+    public class Probe
+    {
+        ...
+        private void Detect()
+        {
+            ...
+            while (true) {
+                ...
+                if (DetectTemperature != null) {
+                    ...
+                    DetectTemperature(this, args);
+                }
+                ...
+            }
+        }
+    }
+}
+        ]]>
+      </programlisting>
+    </para>
+  </sect2>
+
+  <sect2 xml:id="unstable-layout">
+    <title>Unstable Layout</title>
+
+    <para>
+      Some programmers take great pride in lining up certain columns in their
+      code:
+      <programlisting>
+        <![CDATA[
+private const int AbsoluteZero   = -273;
+private const int MaxTemperature = 100;
+        ]]>
+      </programlisting>
+      This is undeniably neat, but the layout is not <emphasis>stable</emphasis>
+      under change. A new constant name that is longer than the preallotted
+      number of columns requires that you move <emphasis>all</emphasis> entries
+      around:
+      <programlisting>
+        <![CDATA[
+private const int AbsoluteZero      = -273;
+private const int MaxTemperature    = 100;
+private const int DetectionInterval = 5000;
+        ]]>
+      </programlisting>
+      This is just the kind of trap that makes you decide to use a name like
+      <literal>DetectionInt</literal> instead of
+     <literal>DetectionInterval</literal>, which is less clear.
+    </para>
+  </sect2>
+</sect1>

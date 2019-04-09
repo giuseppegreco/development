@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--+
+<source name="control-flow.xml" language="XML" begin="19-May-2003">
+<author href="mailto:giuseppe.greco@agamura.com">Giuseppe Greco</author>
+<copyright year="2003">
+<holder web="http://www.agamura.com">Agamura, Inc.</holder>
+</copyright>
+<legalnotice>All rights reserved.</legalnotice>
+</source>
+-->
+
+<sect1 xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://docbook.org/ns/docbook http://docbook.org/xml/5.0/xsd/docbook.xsd"
+    xml:id="control-flow">
+  <title>Control Flow</title>
+
+  <sect2 xml:id="if-statement">
+    <title>The <literal>if</literal> Statement</title>
+
+    <para>
+      Use the <literal>if</literal> statement to select a statement for
+      execution based on the value of a Boolean expression:
+      <programlisting>
+        <![CDATA[
+if (temperatureSum > 0) {
+    averageTemperature = temperatureSum / temperatures.Count;
+} else {
+    averageTemperature = this.Temperature;
+}
+        ]]>
+      </programlisting>
+      To keep you out of trouble, execution statements should always be enclosed
+      within curly braces.
+    </para>
+  </sect2>
+
+  <sect2 xml:id="for-statement">
+    <title>The <literal>for</literal> Statement</title>
+
+    <para>
+      Use the <literal>for</literal> statement only when a variable runs from
+      somewhere with some constant increment or decrement:
+      <programlisting>
+        <![CDATA[
+for (int i = 0; i < temperatures.Count; i++) {
+    temperatureSum += (int) temperatures[i];
+}
+        ]]>
+      </programlisting>
+      As for the <literal>if</literal> statement, execution statements should
+      always be enclosed within curly braces.
+    </para>
+  </sect2>
+
+  <sect2 xml:id="foreach-statement">
+    <title>The <literal>foreach</literal> Statement</title>
+
+    <para>
+      Use the <literal>foreach</literal> statement to iterate through a
+      collection that do not need to be changed:
+      <programlisting>
+        <![CDATA[
+foreach (int temperature in temperatures) {
+    temperatureSum += temperature;
+}
+        ]]>
+      </programlisting>
+      As for the <literal>for</literal> statement, execution statements should
+      always be enclosed within curly braces.
+      <note>
+        Using the <literal>foreach</literal> statement to change a collection
+        may cause unpredictable side effects.
+      </note>
+    </para>
+  </sect2>
+
+  <sect2 xml:id="while-statement">
+    <title>The <literal>while</literal> Statement</title>
+
+    <para>
+      Use the <literal>while</literal> statement to execute a statement until
+      a specified expression evaluates to <literal>false</literal>:
+      <programlisting>
+        <![CDATA[
+while (true) {
+    ...
+    if (DetectTemperature != null) {
+        ...
+        DetectTemperature(this, args);
+    }
+    ...
+}
+        ]]>
+      </programlisting>
+      As for the <literal>foreach</literal> statement, execution statements
+      should always be enclosed within curly braces.
+      <note>
+        If the specified expression never evaluates to <literal>true</literal>,
+        the statement will never be executed.
+      </note>
+    </para>
+  </sect2>
+
+  <sect2 xml:id="do-statement">
+    <title>The <literal>do</literal> Statement</title>
+
+    <para>
+      Use the <literal>do</literal> statement to execute a statement
+      repeatedly until a specified expression evaluates to
+      <literal>false</literal>, at least one time even if the expression
+      never evaluates to <literal>true</literal>:
+      <programlisting>
+        <![CDATA[
+do {
+    ...
+    command = Console.ReadLine();
+
+    switch (command) {
+        ...
+        case CommandExit:
+            exit = true;
+            break;
+        ...
+    }
+} while (!exit);
+        ]]>
+      </programlisting>
+      As for the <literal>while</literal> statement, execution statements
+      should always be enclosed within curly braces.
+    </para>
+  </sect2>
+
+  <sect2 xml:id="switch-statement">
+    <title>The <literal>switch</literal> Statement</title>
+
+    <para>
+      Use the <literal>switch</literal> statement to handle multiple
+      selections by passing control to one of the <literal>case</literal>
+      statements within its body:
+      <programlisting>
+        <![CDATA[
+switch (command) {
+    case CommandAverage:
+        Console.WriteLine(thermometer.AverageTemperature);
+        break;
+    case CommandCurrent:
+        Console.WriteLine(thermometer.Temperature);
+        break;
+    case CommandExit:
+        exit = true;
+        break;
+    default:
+        Console.WriteLine(CommandAverage + "\t\t" + MessageAverage);
+        Console.WriteLine(CommandCurrent + "\t\t" + MessageCurrent);
+        Console.WriteLine(CommandExit + "\t\t" + MessageExit);
+        Console.WriteLine(CommandHelp + "\t\t" + MessageHelp);
+        break;
+}
+        ]]>
+      </programlisting>
+      The <literal>case</literal> statements must evaluate constant
+      expressions, and the <literal>switch</literal> body should always end
+      with a <literal>default</literal> statement handling unexpected options.
+    </para>
+  </sect2>
+
+  <sect2 xml:id="try-catch-statement">
+    <title>
+      The <literal>try</literal>-<literal>catch</literal> Statement
+    </title>
+
+    <para>
+      Use the <literal>try</literal>-<literal>catch</literal> statement to
+      handle raised exceptions:
+      <programlisting>
+        <![CDATA[
+try {
+    temperature = random.Next(AbsoluteZero, MaxTemperature);
+} catch (ArgumentOutOfRangeException) {
+    temperature = MaxTemperature;
+}
+        ]]>
+      </programlisting>
+      If necessary, use <literal>finally</literal> to clean up any
+      resource allocated in the <literal>try</literal>-<literal>catch</literal>
+      block:
+      <programlisting>
+        <![CDATA[
+try {
+    temperatures.Add(temperature);
+} catch (ArgumentOutOfRangeException e) {
+    ...
+} finally {
+    probe.Stop();
+}
+        ]]>
+      </programlisting>
+      <note>
+        Control is always passed to the <literal>finally</literal> block
+        regardless of how the <literal>try</literal>-<literal>catch</literal>
+        block exits.
+      </note>
+    </para>
+  </sect2>
+</sect1>

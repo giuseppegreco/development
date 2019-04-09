@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--+
+<source name="csharp-coding-guidelines.xml" language="XML" begin="15-May-2003">
+<author href="mailto:giuseppe.greco@agamura.com">Giuseppe Greco</author>
+<copyright year="2003">
+<holder web="http://www.agamura.com">Agamura, Inc.</holder>
+</copyright>
+<legalnotice>All rights reserved.</legalnotice>
+</source>
+-->
+
+<!DOCTYPE article [
+<!ENTITY % default SYSTEM "http://www.agamura.com/docbook/ent/current/default.ent">
+%default;
+]>
+
+<article xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://docbook.org/ns/docbook http://docbook.org/xml/5.0/xsd/docbook.xsd"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    xml:lang="&language;"
+    xml:id="csharp-coding-guidelines">
+  <info>
+    <title>C# Coding Guidelines</title>
+
+    <authorgroup>
+      <author>
+        <firstname>Giuseppe</firstname>
+        <surname>Greco</surname>
+        <affiliation>
+          <address><email>giuseppe.greco@&corp.domain;</email></address>
+        </affiliation>
+      </author>
+    </authorgroup>
+
+    <copyright>
+      <year>2012</year>
+      <holder>&corp.longname;.</holder>  
+    </copyright>
+
+    <legalnotice>&legalnotice.lrl;</legalnotice>
+
+    <date>January 2, 2012</date>
+    <releaseinfo>3.0</releaseinfo>
+  </info>
+
+  <xi:include href="introduction.xml"/>
+  <xi:include href="source-files.xml"/>
+  <xi:include href="classes-and-structs.xml"/>
+  <xi:include href="methods.xml"/>
+  <xi:include href="properties.xml"/>
+  <xi:include href="variables-and-constants.xml"/>
+  <xi:include href="control-flow.xml"/>
+  <xi:include href="lexical-issues.xml"/>
+  <xi:include href="code-example.xml"/>
+</article>

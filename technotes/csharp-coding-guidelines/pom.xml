@@ -1,0 +1,102 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.agamura.technotes</groupId>
+  <artifactId>csharp-coding-guidelines</artifactId>
+  <packaging>pom</packaging>
+  <version>3.0</version>
+  <name>C# Coding Guidelines</name>
+
+  <organization>
+    <name>Agamura, Inc.</name>
+    <url>http://www.agamura.com</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <id>j3d</id>
+      <name>Giuseppe Greco</name>
+      <email>giuseppe.greco@agamura.com</email>
+      <organization>Agamura, Inc.</organization>
+      <organizationUrl>http://www.agamura.com</organizationUrl>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+  </developers>
+
+  <properties>
+    <targetDirectory>${project.build.directory}/docbkx</targetDirectory>
+    <sourceDirectory>${basedir}/src/docbkx</sourceDirectory>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.agilejava.docbkx</groupId>
+        <artifactId>docbkx-maven-plugin</artifactId>
+        <version>2.0.13</version>
+        <dependencies>
+          <dependency>
+            <groupId>net.sf.docbook</groupId>
+            <artifactId>docbook-xml</artifactId>
+            <version>5.0-all</version>
+            <classifier>resources</classifier>
+            <type>zip</type>
+            <scope>runtime</scope>
+          </dependency>
+          <dependency>
+            <groupId>net.sf.offo</groupId>
+            <artifactId>fop-hyph</artifactId>
+            <version>1.2</version>
+            <scope>runtime</scope>
+          </dependency>
+          <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>1.8.2</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <xincludeSupported>true</xincludeSupported>
+          <includes>${project.artifactId}.xml</includes>
+        </configuration>
+        <executions>
+          <execution>
+            <id>pdf</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>generate-pdf</goal>
+            </goals>
+            <configuration>
+              <foCustomization>http://www.agamura.com/docbook/xsl/current/fo/docbook.xsl</foCustomization>
+            </configuration>
+          </execution>
+          <execution>
+            <id>xhtml</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>generate-xhtml</goal>
+            </goals>
+            <configuration>
+              <htmlCustomization>http://www.agamura.com/docbook/xsl/current/xhtml/docbook.xsl</htmlCustomization>
+              <htmlStylesheet>docbook.css</htmlStylesheet>
+              <preProcess>
+                <mkdir dir="${targetDirectory}/xhtml"/>
+                <get dest="${targetDirectory}/xhtml">
+                  <resources>
+                    <url url="http://www.agamura.com/docbook/xsl/current/xhtml/docbook.css"/>
+                  </resources>
+                </get>
+              </preProcess>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

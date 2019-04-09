@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--+
+<source name="introduction.xml" language="XML" begin="15-May-2003">
+<author href="mailto:giuseppe.greco@agamura.com">Giuseppe Greco</author>
+<copyright year="2003">
+<holder web="http://www.agamura.com">Agamura, Inc.</holder>
+</copyright>
+<legalnotice>All rights reserved.</legalnotice>
+</source>
+-->
+
+<sect1 xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://docbook.org/ns/docbook http://docbook.org/xml/5.0/xsd/docbook.xsd"
+    xml:id="introduction">
+  <title>Introduction</title>
+
+  <para>
+    This document describes a set of coding style guides for developing
+    programs in the C# language.
+  </para>
+  <para>
+    A style guide is a set of mandatory requirements for layout and
+    formatting. Uniform style makes it easier for other developers to grasp
+    the essence of your programs quickly.
+  </para>
+  <para>
+    A style guide makes you more productive because it <emphasis>reduces
+    gratuitous choice</emphasis>. If you do not have to make choices about
+    trivial matters, you can spend your energy on the solution of real
+    problems.
+  </para>
+  <para>
+    In these guidelines, several constructors are plainly outlawed. That does
+    not mean that developers using them are evil or incompetent. It does mean
+    that the constructs are not essential and can be expressed just as well
+    or even better with other language constructors.
+  </para>
+  <para>
+    If you already have programming experience, you may be initially
+    uncomfortable at giving up some fond habits. However, it is a sign of
+    professionalism to set aside personal preferences in minor matters and to
+    compromise for the benefit of the group.
+  </para>
+</sect1>

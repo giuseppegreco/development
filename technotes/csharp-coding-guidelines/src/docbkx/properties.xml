@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--+
+<source name="properties.xml" language="XML" begin="19-May-2003">
+<author href="mailto:giuseppe.greco@agamura.com">Giuseppe Greco</author>
+<copyright year="2003">
+<holder web="http://www.agamura.com">Agamura, Inc.</holder>
+</copyright>
+<legalnotice>All rights reserved.</legalnotice>
+</source>
+-->
+
+<sect1 xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://docbook.org/ns/docbook http://docbook.org/xml/5.0/xsd/docbook.xsd"
+    xml:id="properties">
+  <title>Properties</title>
+
+  <para>
+    Every property should be preceded by a documentation comment explaining
+    the purpose of the property and describing the value it represents:
+    <programlisting>
+      <![CDATA[
+/// <summary>
+/// Gets the current temperature.
+/// </summary>
+/// <value>
+/// The current temperature in degrees Celsius.
+/// </value>
+public int Temperature
+{
+    get { return temperature; }
+    set { temperature = value; }
+}
+      ]]>
+    </programlisting>
+  </para>
+</sect1>
